@@ -70,14 +70,14 @@ $html = <<<EOD
     <tr>
         <th>Nama Ujian</th>
         <td>{$ujian->nama_ujian}</td>
-        <th>Mata Kuliah</th>
-        <td>{$ujian->nama_matkul}</td> 
+        <th>Pelajaran</th>
+        <td>{$ujian->nama_pelajaran}</td> 
     </tr>
     <tr>
         <th>Jumlah Soal</th>
         <td>{$ujian->jumlah_soal}</td>
-        <th>Dosen</th>
-        <td>{$ujian->nama_dosen}</td>
+        <th>Guru</th>
+        <td>{$ujian->nama_guru}</td>
     </tr>
     <tr>
         <th>Waktu</th>

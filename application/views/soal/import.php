@@ -10,7 +10,7 @@
         <ul class="alert alert-info" style="padding-left: 40px">
             <li>Silahkan import data dari excel, menggunakan format yang sudah disediakan</li>
             <li>Data tidak boleh ada yang kosong, harus terisi semua.</li>
-			<li>Untuk data Dosen, hanya bisa diisi menggunakan ID DOsen. <a data-toggle="modal" href="#dosenId" style="text-decoration:none" class="btn btn-xs btn-primary">Lihat ID</a>.</li>
+			<li>Untuk data Guru, hanya bisa diisi menggunakan ID DOsen. <a data-toggle="modal" href="#guruId" style="text-decoration:none" class="btn btn-xs btn-primary">Lihat ID</a>.</li>
         </ul>
         <div class="text-center">
             <a href="<?= base_url('uploads/import/format/soal.xlsx') ?>" class="btn-default btn">Download Format</a>
@@ -44,8 +44,8 @@
 								<td>Opsi E</td>
 								<td>Jawaban</td>
 								<td>Bobot</td>
-                                <td>Dosen_Id</td>
-                                <td>Matkul_ID</td>
+                                <td>Guru_Id</td>
+                                <td>Pelajaran_ID</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,15 +83,15 @@
 										<td class="<?= $data['bobot'] == null ? 'bg-danger' : ''; ?>">
                                             <?= $data['bobot'] == null ? 'BELUM DIISI' : $data['bobot'];; ?>
                                         </td>
-                                        <td class="<?= $data['dosen_id'] == null ? 'bg-danger' : ''; ?>">
-                                            <?= $data['dosen_id'] == null ? 'BELUM DIISI' : $data['dosen_id'];; ?>
+                                        <td class="<?= $data['guru_id'] == null ? 'bg-danger' : ''; ?>">
+                                            <?= $data['guru_id'] == null ? 'BELUM DIISI' : $data['guru_id'];; ?>
                                         </td>
-										<td class="<?= $data['matkul_id'] == null ? 'bg-danger' : ''; ?>">
-                                            <?= $data['matkul_id'] == null ? 'BELUM DIISI' : $data['matkul_id'];; ?>
+										<td class="<?= $data['pelajaran_id'] == null ? 'bg-danger' : ''; ?>">
+                                            <?= $data['pelajaran_id'] == null ? 'BELUM DIISI' : $data['pelajaran_id'];; ?>
                                         </td>
                                     </tr>
                             <?php
-                                        if ($data['soal'] == null || $data['opsi_a'] == null || $data['opsi_b'] == null || $data['opsi_c'] == null || $data['opsi_d'] == null || $data['opsi_e'] == null || $data['jawaban'] == null || $data['bobot'] == null || $data['dosen_id'] == null || $data['matkul_id'] == null) {
+                                        if ($data['soal'] == null || $data['opsi_a'] == null || $data['opsi_b'] == null || $data['opsi_c'] == null || $data['opsi_d'] == null || $data['opsi_e'] == null || $data['jawaban'] == null || $data['bobot'] == null || $data['guru_id'] == null || $data['pelajaran_id'] == null) {
                                             $status = false;
                                         }
                                     endforeach;
@@ -113,27 +113,27 @@
     </div>
 </div>
 
-<div class="modal fade" id="dosenId">
+<div class="modal fade" id="guruId">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Data Dosen</h4>
+                <h4 class="modal-title">Data Guru</h4>
             </div>
             <div class="modal-body">
-                <table id="dosen" class="table table-bordered table-condensed table-striped">
+                <table id="guru" class="table table-bordered table-condensed table-striped">
                     <thead>
                         <th>ID</th>
                         <th>Nama</th>
-                        <th>Matkul_id</th>
+                        <th>Pelajaran_id</th>
                     </thead>
                     <tbody>
-                        <?php foreach ($dosen as $k) : ?>
+                        <?php foreach ($guru as $k) : ?>
                             <tr>
-                                <td><?= $k->id_dosen; ?></td>
-                                <td><?= $k->nama_dosen; ?></td>
-                                <td><?= $k->matkul_id; ?></td>
+                                <td><?= $k->id_guru; ?></td>
+                                <td><?= $k->nama_guru; ?></td>
+                                <td><?= $k->pelajaran_id; ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -146,7 +146,7 @@
 <script>
     $(document).ready(function() {
         let table;
-        table = $("#dosen").DataTable({
+        table = $("#guru").DataTable({
             "lengthMenu": [
                 [5, 10, 25, 50, 100, -1],
                 [5, 10, 25, 50, 100, "All"]

@@ -29,14 +29,14 @@ class Dashboard extends CI_Controller {
 			],
 			[
 				'box' 		=> 'yellow-active',
-				'total' 	=> $this->dashboard->total('dosen'),
-				'title'		=> 'Dosen',
+				'total' 	=> $this->dashboard->total('guru'),
+				'title'		=> 'Guru',
 				'icon'		=> 'user-secret'
 			],
 			[
 				'box' 		=> 'red',
-				'total' 	=> $this->dashboard->total('mahasiswa'),
-				'title'		=> 'Mahasiswa',
+				'total' 	=> $this->dashboard->total('siswa'),
+				'title'		=> 'Siswa',
 				'icon'		=> 'user'
 			],
 		];
@@ -55,18 +55,18 @@ class Dashboard extends CI_Controller {
 
 		if ( $this->ion_auth->is_admin() ) {
 			$data['info_box'] = $this->admin_box();
-		} elseif ( $this->ion_auth->in_group('dosen') ) {
-			$matkul = ['matkul' => 'dosen.matkul_id=matkul.id_matkul'];
-			$data['dosen'] = $this->dashboard->get_where('dosen', 'nip', $user->username, $matkul)->row();
+		} elseif ( $this->ion_auth->in_group('guru') ) {
+			$pelajaran = ['pelajaran' => 'guru.pelajaran_id=pelajaran.id_pelajaran'];
+			$data['guru'] = $this->dashboard->get_where('guru', 'nip', $user->username, $pelajaran)->row();
 
-			$kelas = ['kelas' => 'kelas_dosen.kelas_id=kelas.id_kelas'];
-			$data['kelas'] = $this->dashboard->get_where('kelas_dosen', 'dosen_id' , $data['dosen']->id_dosen, $kelas, ['nama_kelas'=>'ASC'])->result();
+			$kelas = ['kelas' => 'kelas_guru.kelas_id=kelas.id_kelas'];
+			$data['kelas'] = $this->dashboard->get_where('kelas_guru', 'guru_id' , $data['guru']->id_guru, $kelas, ['nama_kelas'=>'ASC'])->result();
 		}else{
 			$join = [
 				'kelas b' 	=> 'a.kelas_id = b.id_kelas',
 				'jurusan c'	=> 'b.jurusan_id = c.id_jurusan'
 			];
-			$data['mahasiswa'] = $this->dashboard->get_where('mahasiswa a', 'nim', $user->username, $join)->row();
+			$data['siswa'] = $this->dashboard->get_where('siswa a', 'nim', $user->username, $join)->row();
 		}
 
 		$this->load->view('_templates/dashboard/_header.php', $data);

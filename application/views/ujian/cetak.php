@@ -69,26 +69,26 @@ Berikut adalah data Hasil ujian anda :
 <table id="data-peserta">
     <tr>
         <th>NIM</th>
-        <td>{$mhs->nim}</td>
+        <td>{$siswa->nim}</td>
     </tr>
     <tr>
         <th>Nama</th>
-        <td>{$mhs->nama}</td>
+        <td>{$siswa->nama}</td>
     </tr>
     <tr>
         <th>Kelas</th>
-        <td>{$mhs->nama_kelas}</td>
+        <td>{$siswa->nama_kelas}</td>
     </tr>
     <tr>
         <th>Jurusan</th>
-        <td>{$mhs->nama_jurusan}</td>
+        <td>{$siswa->nama_jurusan}</td>
     </tr>
 </table>
 <h2>Data Ujian</h2>
 <table id="data-hasil">
     <tr>
-        <th>Mata Kuliah</th>
-        <td>{$ujian->nama_matkul}</td>
+        <th>Pelajaran</th>
+        <td>{$ujian->nama_pelajaran}</td>
     </tr>
     <tr>
         <th>Nama Ujian</th>
@@ -118,4 +118,4 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output($ujian->nama_ujian.'_'.$mhs->nim.'.pdf', 'I');
+$pdf->Output($ujian->nama_ujian.'_'.$siswa->nim.'.pdf', 'I');
